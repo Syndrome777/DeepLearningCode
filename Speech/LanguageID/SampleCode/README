@@ -1,0 +1,16 @@
+Model Description:
+
+1. Input Layer
+2. Conv Layer [32, 5*7, 2*3]
+2- BatchNorm
+3. Conv Layer [64, 5*5, 2*2]
+4. MaxPooling [2*2]
+4- BatchNorm
+5. Conv Layer [128, 3*3, 1*1]
+5- BatchNorm
+6. Dense Layer 3D [input_dim * 4]
+7. LSTM Layer [256]
+8. Dense Layer
+9. Softmax
+
+

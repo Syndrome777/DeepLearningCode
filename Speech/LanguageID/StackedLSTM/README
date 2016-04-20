@@ -1,0 +1,38 @@
+Model Description:
+
+1. Input Layer [batch_size, time_stamp, 88]
+
+2-a. Conv Layer [16, 7*7, 1*1]
+2-b. Conv Layer [16, 5*5, 1*1]
+2-c. Conv Layer [16, 3*3, 1*1]
+2-d. Conv Layer [16, 1*1, 1*1]
+3. Concat Layer [2-a, 2-b, 2-c, 2-d]
+4. MaxPool Layer [2*2]
+4- BatchNorm
+
+5-a. Conv Layer [32, 5*5, 1*1]
+5-b. Conv Layer [32, 3*3, 1*1]
+5-c. Conv Layer [32, 1*1, 1*1]
+6. Concat Layer [5-a, 5-b, 5-c]
+7. MaxPool Layer [2*2]
+7- BatchNorm
+
+8-a. Conv Layer [64, 5*5, 1*1]
+8-b. Conv Layer [64, 3*3, 1*1]
+8-c. Conv Layer [64, 1*1, 1*1]
+9. Concat Layer [8-a, 8-b, 8-c]
+10. MaxPool Layer [2*2]
+10- BatchNorm
+
+11. Dense Layer 3D [88*4]
+
+12. LSTM Layer [256]
+
+13. Dense Layer
+14. Softmax
+
+
+
+
+
+
