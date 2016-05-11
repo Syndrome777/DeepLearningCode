@@ -1,0 +1,29 @@
+Model Description:
+
+1. Input Layer [batch_size, 128, 128, 128]
+
+2. Conv Layer [32, 5*5, 2*2]
+2- BatchNorm
+
+3. Conv Layer [64, 5*5, 2*2]
+3- BatchNorm
+
+4. Conv Layer [128, 3*3, 1*1]
+5. MaxPool Layer [2*2]
+5- BatchNorm
+
+6. Conv Layer [256, 3*3, 1*1]
+7. MaxPool Layer [2*2]
+7- BatchNorm
+
+8. Conv Layer [512, 3*3, 1*1]
+9. AvgPool Layer [8*8]
+
+10. Dense Layer
+11. Softmax
+
+
+
+
+
+

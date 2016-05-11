@@ -1,0 +1,17 @@
+[global]
+device = cpu
+floatX = float32
+cuda.disable_gcc_cudnn_check=True
+#optimizer_including=cudnn
+mode = FAST_RUN
+#allow_gc =False
+
+[lib]
+cnmem=0.02
+
+[gcc]
+#cxxflags = -I-LD:\users\v-lifenh\Anaconda2\Anaconda2\MinGW\bin
+[blas]
+#ldflags = -LD:\mkl\redist\intel64\mkl -mkl_rt
+[nvcc]
+fastmath = True
