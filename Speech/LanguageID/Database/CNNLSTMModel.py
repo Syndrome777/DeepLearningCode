@@ -155,7 +155,7 @@ class CNNLSTMModel(object):
 		#cost = cost + l2_reg * 2e-5
 		predict_l = T.argmax(network_output, axis=1)
 		print("Computing updates ...")
-		#updates = lasagne.updates.adagrad(cost, self.all_params, self.LEARNING_RATE / lr_sclce * 1000)
+		#updates = lasagne.updates.adagrad(cost, self.all_params, self.LEARNING_RATE / lr_sclce)
 		#updates = lasagne.updates.adadelta(cost, self.all_params, self.LEARNING_RATE / lr_sclce)
 		#updates = lasagne.updates.rmsprop(cost, self.all_params, self.LEARNING_RATE / lr_sclce)
 		#updates = lasagne.updates.nesterov_momentum(cost, self.all_params, self.LEARNING_RATE / lr_sclce)
@@ -413,7 +413,8 @@ class CNNLSTMModel(object):
 			#print(X)
 			train_cost = train_cost + self.train_step(X, y, m, lr_sclce)
 			if self.ind + self.BATCH_SIZE >= self.SAMPLE_NUM - 10:
-				random.shuffle(self.trainData)
+				#random.shuffle(self.trainData)
+				self.database.resetTrainingData()
 				self.ind = (self.ind + self.BATCH_SIZE) % self.SAMPLE_NUM
 			else:
 				self.ind += self.BATCH_SIZE
@@ -530,12 +531,13 @@ def main():
 	
 	if not os.path.exists('./dump'):
 		os.makedirs('./dump')
-	#f_ = open('./dump/256_Emotion_LSTM_Model_not_sorted.dump_0.01_0_0_0.640827922078', 'rb')
-	#all_param_values = cPickle.load(f_)
-	#f_.close()
+	f_ = open('./dump/256_Emotion_LSTM_Model_not_sorted.dump_0.001_0_20_0.874486019737', 'rb')
+	all_param_values = cPickle.load(f_)
+	f_.close()
 	
 	CLModel = CNNLSTMModel()
-	CLModel.__buildModel__(trainData, validData, language_id = LanguageId, learning_rate = 0.001, input_dim = 88, batch_size = 512, hidden_dim = 256, max_length = 300)
+	CLModel.__buildModel__(trainData, validData, language_id = LanguageId, learning_rate = 0.002, input_dim = 88, batch_size = 512, 
+								hidden_dim = 256, max_length = 300, label_skip = 1)
 	data_root = "D:/users/v-lifenh/Root_LanguageIdentification/GetLanguageIdentificationData/Feature/GetSpe/data_sig"
 	data_root = "\\\\speech-tesla05\\d$\\users\\v-lifenh\\Root_LanguageIdentification\\GetLanguageIdentificationData\\Feature\\GetSpe\\data_sig"
 	data_root = "D:/users/v-lifenh/Root_LanguageIdentification/GetLanguageIdentificationData/Feature/Get80DimsFea/data"
@@ -553,6 +555,7 @@ def main():
 		print(p.shape)
 	i = 0
 	iter = 0
+	CLModel.updateParam(all_param_values)
 	while True:
 		if i == -1:
 			train_cost = CLModel.train(200, 10)
